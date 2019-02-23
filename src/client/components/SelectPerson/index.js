@@ -20,7 +20,7 @@ export default function SelectPerson({ persons, select }) {
                 className={styles.person}
                 onClick={() => select(id)}
               >
-                <img src={`public/avatars/${avatar}`}/>
+                <img src={`/public/avatars/${avatar}`}/>
               </div>
             ))
           }

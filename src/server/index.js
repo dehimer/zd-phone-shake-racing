@@ -52,6 +52,9 @@ io.on('connection', (socket) => {
       case 'server/selectperson':
         can.emit('person:select', socket, data);
         break;
+      case 'server/shake':
+        can.emit('shake', data);
+        break;
       default: console.log(`Unknown action ${type}`);
     }
   });
@@ -87,4 +90,9 @@ can.on('person:unselect', (socket) => {
 
   can.emit('persons:sync');
   can.emit('person:selected', socket)
+});
+
+
+can.on('shake', (data) => {
+  console.log('shake');
 });
