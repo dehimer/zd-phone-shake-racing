@@ -22,18 +22,6 @@ server.listen(port, () => {
   console.log(`Server is ran on : http://localhost:${port}`);
 });
 
-
-/*
-[socket.id]: {
-  id
-  socket
-
-}
-*/
-const players = {};
-
-
-
 // SOCKETIO
 const io = socketIO();
 io.attach(server);
