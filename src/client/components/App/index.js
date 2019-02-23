@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useMappedState } from 'redux-react-hook';
 
-import Persons from '../Persons'
+import SelectPerson from '../SelectPerson';
 
 import styles from './index.css'
 
@@ -23,7 +23,7 @@ export default function App() {
         Звонкая Масленница
       </div>
       <div className={styles.content}>
-        { persons && <Persons persons={persons} /> }
+        { persons && <SelectPerson persons={persons} /> }
         {/*{ persons && !person
           ? <Persons persons={[]} select={this.setPerson}/>
           : null

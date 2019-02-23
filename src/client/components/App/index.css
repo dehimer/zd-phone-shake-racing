@@ -9,8 +9,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 40px;
-  font-size: 21px;
+  flex: 0 0 5vh;
+
+  font-size: 3.5vh;
+  font-family: HelveticaNeue-Light, Helvetica Neue Light, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;
 }
 
 .content {
