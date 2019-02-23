@@ -18,21 +18,19 @@
     font-family: HelveticaNeue-Light, Helvetica Neue Light, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;
     text-align: center;
 
-    flex: 0 0 12vh;
+    flex: 0 0 18vh;
 }
 
 .personsWrapper {
-    /*overflow: hidden;*/
     overflow-y: scroll;
-    height: 83vh;
+    flex: 0 0 77vh;
 }
 
 .persons {
     flex: 1;
     display: flex;
     flex-wrap: wrap;
-    padding: 15px;
-    overflow-y: scroll;
+    padding: 0 15px;
 }
 
 .person {
