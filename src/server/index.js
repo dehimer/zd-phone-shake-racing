@@ -40,7 +40,6 @@ io.attach(server);
 
 io.on('connection', (socket) => {
   can.emit('persons:sync');
-  socket.emit('action', { type: 'userId', })
 
   socket.on('disconnect', () => {
     can.emit('person:unselect', socket)
@@ -59,7 +58,11 @@ io.on('connection', (socket) => {
 });
 
 can.on('persons:sync', (socket=io) => {
-  socket.emit('action', { type: 'server/persons', data: persons });
+  socket.emit('action', { type: 'server/persons', data: persons.filter(person => !person.userId) });
+});
+
+can.on('person:selected', (socket) => {
+  socket.emit('action', { type: 'server/selectedperson', data: persons.find(person => socket.id === person.userId) });
 });
 
 can.on('person:select', (socket, personId) => {
@@ -71,6 +74,7 @@ can.on('person:select', (socket, personId) => {
   });
 
   can.emit('persons:sync');
+  can.emit('person:selected', socket)
 });
 
 can.on('person:unselect', (socket) => {
@@ -82,4 +86,5 @@ can.on('person:unselect', (socket) => {
   });
 
   can.emit('persons:sync');
+  can.emit('person:selected', socket)
 });

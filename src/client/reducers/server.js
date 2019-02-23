@@ -8,8 +8,8 @@ export default function reducer(state = defaultState, action) {
   const { type, data } = action;
 
   switch (type) {
-    // case 'server/selectperson':
-    //   return { ...state, persons: data };
+    case 'server/selectedperson':
+      return { ...state, person: data };
     case 'server/persons':
       return { ...state, persons: data };
     default:

@@ -1,37 +1,71 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import { useMappedState } from 'redux-react-hook';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
 
 import SelectPerson from '../SelectPerson';
+import Shaker from '../Shaker';
+import NoFreePersons from '../NoFreePersons';
 
 import styles from './index.css'
 
-export default function App() {
-  const mapState = useCallback(state => {
-    console.log('useCallback');
-    console.log(state);
-    return state.server.persons;
-  }, []);
+class App extends Component {
+  render() {
+    const { persons, person, selectPerson } = this.props;
 
-  const persons = useMappedState(mapState);
-  useEffect(() => {
-    console.log('persons');
-    console.log(persons);
-  });
-  return (
-    <div className={styles.app}>
-      <div className={styles.title}>
-        Звонкая Масленница
+    let contentEl = null;
+    if (person) {
+      contentEl = <Shaker person={person} />;
+    } else if (persons) {
+      const allPersonsInUse = persons && persons.length === 0;
+
+      if (allPersonsInUse) {
+        contentEl = <NoFreePersons />;
+      } else {
+        contentEl = <SelectPerson persons={persons} select={(id) => selectPerson(id)} />;
+      }
+    }
+
+
+    return (
+      <div className={styles.app}>
+        <div className={styles.title}>
+          Звонкая Масленница
+        </div>
+        <div className={styles.content}>
+          { contentEl }
+        </div>
       </div>
-      <div className={styles.content}>
-        { persons && <SelectPerson persons={persons} /> }
-        {/*{ persons && !person
-          ? <Persons persons={[]} select={this.setPerson}/>
-          : null
-        }*/}
-      </div>
-    </div>
-  )
+    )
+  }
 }
+
+// App.propTypes = {
+//   // eslint-disable-next-line react/forbid-prop-types
+//   persons: PropTypes.array,
+//   person: PropTypes.object,
+// };
+
+const mapStateToProps = (state) => {
+  const { persons, person } = state.server;
+  return { persons, person };
+};
+
+const mapDispatchToProps = dispatch => (
+  {
+    selectPerson: (id) => {
+      dispatch({
+        type: 'server/selectperson',
+        data: id
+      });
+    },
+  }
+);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
 /*
 class App extends Component {
   static getDerivedStateFromProps(props, state) {
@@ -93,29 +127,5 @@ class App extends Component {
   }
 }
 
-App.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  json: PropTypes.object,
-};
 
-const mapStateToProps = (state) => {
-  const { persons } = state.server;
-
-  return { persons };
-};
-
-const mapDispatchToProps = dispatch => (
-  {
-    selectPerson: (data) => {
-      dispatch({
-        type: 'server/getperson',
-        data);
-    },
-  }
-);
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
 */
