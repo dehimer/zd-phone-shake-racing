@@ -7,7 +7,10 @@ import {connect} from "react-redux";
 
 class Shaker extends Component {
   state = {
+    acceleration: { x: 0, y: 0, z: 0 },
+    currentAcceleration: 0,
     maxAcceleration: 10,
+    err: null
   };
 
   constructor(props) {
@@ -23,21 +26,23 @@ class Shaker extends Component {
 
     if (acceleration.x != null)
     {
-      const { x, y, z } = acceleration;
+        const { x, y, z } = acceleration;
 
-      const currentAcceleration = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2));
+        const sumOfSquares = Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2);
+        const currentAcceleration = (sumOfSquares > 0) ? Math.sqrt(sumOfSquares) : 0;
 
-      let { maxAcceleration } = this.state;
-      if (maxAcceleration < currentAcceleration) {
-
-        maxAcceleration = currentAcceleration;
+        let { maxAcceleration } = this.state;
+        if (maxAcceleration < currentAcceleration) {
+          maxAcceleration = currentAcceleration;
+        }
 
         this.setState({
-          maxAcceleration
-        })
-      }
+          maxAcceleration,
+          currentAcceleration,
+          acceleration
+        });
 
-      shake({ id: person.id, acceleration: currentAcceleration/maxAcceleration });
+        shake({ id: person.id, acceleration: currentAcceleration/maxAcceleration });
     }
   };
 
@@ -49,14 +54,30 @@ class Shaker extends Component {
     window.removeEventListener('devicemotion', this.handleAcceleration, false);
   }
 
+  /*
+  shouldComponentUpdate(nextProps, nextState) {
+    if (nextState.currentAcceleration !== this.state.currentAcceleration) return true;
+    if (nextProps.persons !== this.props.persons) return true;
+    if (nextProps.person !== this.props.person) return true;
+
+    return false;
+  }
+  */
+
   render() {
     const { person } = this.props;
+    const { acceleration: { x, y, z } } = this.state;
 
     return (
       <div className={styles.shaker}>
         <ScreenName name={<>Тряси<br/>и играй</>}/>
         <div className={styles.content}>
-          <img src={`/public/avatars/${person.avatar}`}/>
+          <img
+            style={{
+              transform: `translate(${x}%, ${y}%) scale(${1+z/50})`
+            }}
+            src={`/public/avatars/${person.avatar}`}
+          />
         </div>
       </div>
     )
