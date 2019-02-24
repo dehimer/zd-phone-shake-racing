@@ -41,10 +41,22 @@ unityIO.on('connection', (socket) => {
   can.emit('persons', socket);
 });
 
+const addessSocketMap = {};
+
 webmobileIO.on('connection', (socket) => {
+  const { address } = socket.handshake;
+
+  if (addessSocketMap[address]) {
+    console.log(`Client ${address} is aleady connected. Disconnect oldest.`);
+    addessSocketMap[address].emit('stop');
+  }
+
+  addessSocketMap[address] = socket;
+
   can.emit('persons:sync', socket);
 
   socket.on('disconnect', () => {
+    delete addessSocketMap[address];
     can.emit('person:unselect', socket)
   });
 
@@ -73,8 +85,10 @@ can.on('person:selected', (socket) => {
 });
 
 can.on('person:select', (socket, personId) => {
+  console.log('person:select');
   persons = persons.map((person) => {
     if (person.id === personId) {
+      console.log(person);
       person.userId = socket.id;
     }
     return person;
@@ -87,8 +101,10 @@ can.on('person:select', (socket, personId) => {
 });
 
 can.on('person:unselect', (socket) => {
+  console.log('person:unselect');
   persons = persons.map((person) => {
     if (person.userId === socket.id) {
+      console.log(person);
       delete person.userId;
     }
     return person;

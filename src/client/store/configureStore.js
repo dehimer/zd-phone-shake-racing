@@ -18,6 +18,7 @@ export default function configureStore() {
   socket.on('connect_error', () => store.dispatch({ type: 'disconnect' }));
   socket.on('reconnect_error', () => store.dispatch({ type: 'disconnect' }));
   socket.on('reconnect', () => store.dispatch({ type: 'reconnect' }));
+  socket.on('stop', () => {socket.disconnect(); store.dispatch({ type: 'disconnect' })});
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers

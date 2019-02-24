@@ -15,5 +15,5 @@
 .content img {
     border: 3px solid red;
     width: 70%;
-    transition: transform 0.1s, scale 0.1ms;
+    transition: transform 1s, scale 1ms;
 }
