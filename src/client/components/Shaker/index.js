@@ -6,6 +6,10 @@ import styles from './index.css'
 import {connect} from "react-redux";
 
 class Shaker extends Component {
+  state = {
+    maxAcceleration: 10,
+  };
+
   constructor(props) {
     super(props);
 
@@ -19,7 +23,18 @@ class Shaker extends Component {
 
     if (acceleration.x != null)
     {
-      shake({ id: person.id, acceleration });
+      const { x, y, z } = acceleration;
+
+      const currentAcceleration = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2));
+
+      const { maxAcceleration } = this.state;
+      if (maxAcceleration < currentAcceleration) {
+        this.setState({
+          maxAcceleration: currentAcceleration
+        })
+      }
+
+      shake({ id: person.id, acceleration: currentAcceleration/maxAcceleration });
     }
   };
 
