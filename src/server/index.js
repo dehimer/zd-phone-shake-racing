@@ -29,6 +29,17 @@ const io = socketIO();
 io.attach(server);
 const webmobileIO = io.of('/webmobile');
 const unityIO = io.of('/unity');
+const emulatorIO = io.of('/emulator');
+
+
+emulatorIO.on('connection', (socket) => {
+  console.log('connection emulatorIO');
+  can.emit('persons', socket);
+});
+
+unityIO.on('connection', (socket) => {
+  can.emit('persons', socket);
+});
 
 webmobileIO.on('connection', (socket) => {
   can.emit('persons:sync', socket);
@@ -47,7 +58,6 @@ webmobileIO.on('connection', (socket) => {
       case 'server/shake':
         can.emit('shake', data);
         break;
-      default: console.log(`Unknown action ${type}`);
     }
   });
 });
@@ -71,7 +81,8 @@ can.on('person:select', (socket, personId) => {
   });
 
   can.emit('persons:sync', webmobileIO);
-  can.emit('persons:sync', unityIO);
+  can.emit('persons', unityIO);
+  can.emit('persons', emulatorIO);
   can.emit('person:selected', socket)
 });
 
@@ -84,7 +95,8 @@ can.on('person:unselect', (socket) => {
   });
 
   can.emit('persons:sync', webmobileIO);
-  can.emit('persons:sync', unityIO);
+  can.emit('persons', unityIO);
+  can.emit('persons', emulatorIO);
   can.emit('person:selected', socket)
 });
 
@@ -92,18 +104,10 @@ can.on('person:unselect', (socket) => {
 can.on('shake', (data) => {
   console.log('shake');
   console.log(data);
-  unityIO.emit('shake', data)
+  unityIO.emit('shake', data);
+  emulatorIO.emit('shake', data);
 });
 
-
-/*
-socket.emit('persons:sync', [
-  { id: 'spoons', userId: 'userXId' },
-  { id: 'balalaika' },
-  { id: 'ratchet', userId: 'userYId'  },
-  { id: 'accordion' },
-  { id: 'tambourine' },
-]);
-
-socket.emit('shake', { id: 'spoons', acceleration: {x, y, z}});
-*/
+can.on('persons', (socket) => {
+  socket.emit('persons', persons);
+});

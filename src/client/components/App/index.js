@@ -28,7 +28,6 @@ class App extends Component {
 
     setTimeout(() => {
       if (x === null) {
-        console.log('ERRRRRROR');
         this.setState({ noAcceleration: true });
       }
     }, 1000);

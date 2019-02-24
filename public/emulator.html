@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Screen Emulator</title>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    Persons:
+    <div id="persons"></div>
+    <br/>
+    Accelerations:
+    <div id="acceleration"></div>
+
+    <script>
+      var socket = io(`http://${location.hostname}:3000/emulator`);
+
+      socket.on('persons', function (persons) {
+        document.getElementById('persons').innerHTML = persons.map(function (person) {
+          return '<div>'+JSON.stringify(person)+'</div>';
+        }).join('');
+      });
+
+      var accelerations = [];
+
+      socket.on('shake', function (acceleration) {
+        accelerations.unshift(JSON.stringify(acceleration));
+        if (accelerations.length > 20) {
+          accelerations.pop();
+        }
+
+        document.getElementById('acceleration').innerHTML = accelerations.join('<br/>');
+      });
+    </script>
+</body>
+</html>
