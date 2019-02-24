@@ -40,7 +40,7 @@ webmobileIO.on('connection', (socket) => {
 
   socket.on('action', (action) => {
     const { type, data } = action;
-    console.log(action);
+
     switch (type) {
       case 'server/selectperson':
         can.emit('person:select', socket, data);

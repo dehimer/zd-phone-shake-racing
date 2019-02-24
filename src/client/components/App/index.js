@@ -10,33 +10,39 @@ import Error from '../Error';
 import styles from './index.css'
 
 class App extends Component {
-  /*
-  checkAcceleration() {
+  state = {};
 
+  checkAcceleration() {
+    let x = null;
     const accelerationHandler = (e) => {
       const { acceleration } = e;
 
-      if (acceleration.x === null) {
-        this.setState({ error });
+      if (acceleration.x !== null) {
+        x = acceleration.x;
       }
 
       window.removeEventListener('devicemotion', accelerationHandler, false);
     };
 
     window.addEventListener('devicemotion', accelerationHandler, false);
+
+    setTimeout(() => {
+      if (x === null) {
+        console.log('ERRRRRROR');
+        this.setState({ noAcceleration: true });
+      }
+    }, 1000);
   };
 
   componentDidMount() {
     this.checkAcceleration();
   }
-  */
 
   render() {
-    const { persons, person, selectPerson, socket: { disconnected } } = this.props;
+    const { persons, person, selectPerson, socket: { disconnected, reconnect } } = this.props;
+    const { noAcceleration } = this.state;
 
-    console.log('window.DeviceMotionEvent');
-    console.log(window.DeviceMotionEvent);
-    const error = disconnected || window.DeviceMotionEvent === undefined;
+    const error = disconnected || reconnect || window.DeviceMotionEvent === undefined || noAcceleration;
 
     let contentEl = null;
     if (error) {
