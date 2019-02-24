@@ -45,7 +45,8 @@ class App extends Component {
 
     let contentEl = null;
     if (error) {
-      contentEl = <Error />;
+      const kind = (disconnected || reconnect) ? 'connection' : 'acceleration';
+      contentEl = <Error kind={kind} />;
     } else if (person) {
       contentEl = <Shaker person={person} />;
     } else if (persons) {
