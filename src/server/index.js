@@ -28,9 +28,11 @@ server.listen(port, () => {
 // SOCKETIO
 const io = socketIO();
 io.attach(server);
+const webmobileIO = io.of('/webmobile');
+const unityIO = io.of('/unity');
 
-io.on('connection', (socket) => {
-  can.emit('persons:sync');
+webmobileIO.on('connection', (socket) => {
+  can.emit('persons:sync', socket);
 
   socket.on('disconnect', () => {
     can.emit('person:unselect', socket)
@@ -52,7 +54,9 @@ io.on('connection', (socket) => {
 });
 
 can.on('persons:sync', (socket=io) => {
-  socket.emit('action', { type: 'server/persons', data: persons.filter(person => !person.userId) });
+  socket.emit('action', {
+    type: 'server/persons', data: persons.filter(person => !person.userId)
+  });
 });
 
 can.on('person:selected', (socket) => {
@@ -67,7 +71,8 @@ can.on('person:select', (socket, personId) => {
     return person;
   });
 
-  can.emit('persons:sync');
+  can.emit('persons:sync', webmobileIO);
+  can.emit('persons:sync', unityIO);
   can.emit('person:selected', socket)
 });
 
@@ -79,7 +84,8 @@ can.on('person:unselect', (socket) => {
     return person;
   });
 
-  can.emit('persons:sync');
+  can.emit('persons:sync', webmobileIO);
+  can.emit('persons:sync', unityIO);
   can.emit('person:selected', socket)
 });
 
@@ -87,6 +93,7 @@ can.on('person:unselect', (socket) => {
 can.on('shake', (data) => {
   console.log('shake');
   console.log(data);
+  unityIO.emit('shake', data)
 });
 
 

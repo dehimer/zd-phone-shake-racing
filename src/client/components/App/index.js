@@ -10,10 +10,33 @@ import Error from '../Error';
 import styles from './index.css'
 
 class App extends Component {
+  /*
+  checkAcceleration() {
+
+    const accelerationHandler = (e) => {
+      const { acceleration } = e;
+
+      if (acceleration.x === null) {
+        this.setState({ error });
+      }
+
+      window.removeEventListener('devicemotion', accelerationHandler, false);
+    };
+
+    window.addEventListener('devicemotion', accelerationHandler, false);
+  };
+
+  componentDidMount() {
+    this.checkAcceleration();
+  }
+  */
+
   render() {
     const { persons, person, selectPerson, socket: { disconnected } } = this.props;
 
-    const error = disconnected;
+    console.log('window.DeviceMotionEvent');
+    console.log(window.DeviceMotionEvent);
+    const error = disconnected || window.DeviceMotionEvent === undefined;
 
     let contentEl = null;
     if (error) {
