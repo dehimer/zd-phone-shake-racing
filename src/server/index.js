@@ -15,10 +15,9 @@ const app = express();
 const server = http.createServer(app);
 
 
-const imagesDirPath = path.join(__dirname, '..', '..', 'images');
 app.use(express.static('dist'));
-app.use('/images', express.static(imagesDirPath));
 app.use('/public', express.static(path.join(__dirname, '..', '..', 'public')));
+// app.use('*/', path.join(__dirname, '..', '..'));
 
 
 server.listen(port, () => {
