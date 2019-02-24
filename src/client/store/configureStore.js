@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import io from 'socket.io-client';
 import createSocketIoMiddleware from 'redux-socket.io';
+// import error from 'redux-socket.io-error-thunk';
 import { rootReducer } from '../reducers/index';
 import { port } from '../../../config';
 
@@ -12,6 +13,11 @@ export default function configureStore() {
   const store = compose(
     applyMiddleware(socketIoMiddleware),
   )(createStore)(rootReducer);
+
+  socket.on('connect_timeout', () => store.dispatch({ type: 'disconnect' }));
+  socket.on('connect_error', () => store.dispatch({ type: 'disconnect' }));
+  socket.on('reconnect_error', () => store.dispatch({ type: 'disconnect' }));
+  socket.on('reconnect', () => store.dispatch({ type: 'reconnect' }));
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers

@@ -5,15 +5,20 @@ import { connect } from 'react-redux';
 import SelectPerson from '../SelectPerson';
 import Shaker from '../Shaker';
 import NoFreePersons from '../NoFreePersons';
+import Error from '../Error';
 
 import styles from './index.css'
 
 class App extends Component {
   render() {
-    const { persons, person, selectPerson } = this.props;
+    const { persons, person, selectPerson, socket: { disconnected } } = this.props;
+
+    const error = disconnected;
 
     let contentEl = null;
-    if (person) {
+    if (error) {
+      contentEl = <Error />;
+    } else if (person) {
       contentEl = <Shaker person={person} />;
     } else if (persons) {
       const allPersonsInUse = persons && persons.length === 0;
@@ -40,8 +45,10 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { persons, person } = state.server;
-  return { persons, person };
+  const { socket, server } = state;
+  const { persons, person } = server;
+
+  return { persons, person, socket };
 };
 
 const mapDispatchToProps = dispatch => (
