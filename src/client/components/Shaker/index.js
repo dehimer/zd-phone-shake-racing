@@ -27,10 +27,13 @@ class Shaker extends Component {
 
       const currentAcceleration = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2));
 
-      const { maxAcceleration } = this.state;
+      let { maxAcceleration } = this.state;
       if (maxAcceleration < currentAcceleration) {
+
+        maxAcceleration = currentAcceleration;
+
         this.setState({
-          maxAcceleration: currentAcceleration
+          maxAcceleration
         })
       }
 
