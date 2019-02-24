@@ -1,28 +1,34 @@
 import React, { Component } from 'react';
+import _ from 'underscore';
 
 import ScreenName from "../ScreenName";
 import styles from './index.css'
 import {connect} from "react-redux";
 
 class Shaker extends Component {
-  componentDidMount() {
+  constructor(props) {
+    super(props);
+
+    this.handleAcceleration = _.throttle(this.handleAcceleration, 100);
+  }
+
+  handleAcceleration = (e) => {
     const { shake, person } = this.props;
 
-    this.intReadAc = setInterval(()=>{
-      if (window.DeviceMotionEvent !== undefined) {
-        window.ondevicemotion = function(e) {
-          const { acceleration } = e;
-          if(acceleration.x != null)
-          {
-            shake({ id: person.id, acceleration });
-          }
-        }
-      }
-    },100);
+    const { acceleration } = e;
+
+    if (acceleration.x != null)
+    {
+      shake({ id: person.id, acceleration });
+    }
+  };
+
+  componentDidMount() {
+    window.addEventListener('devicemotion', this.handleAcceleration, false);
   }
 
   componentWillUnmount() {
-    clearInterval(this.intReadAc);
+    window.removeEventListener('devicemotion', this.handleAcceleration, false);
   }
 
   render() {
