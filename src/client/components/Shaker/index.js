@@ -14,7 +14,7 @@ class Shaker extends Component {
           const { acceleration } = e;
           if(acceleration.x != null)
           {
-            shake({ person, acceleration });
+            shake({ id: person.id, acceleration });
           }
         }
       }

@@ -1,10 +1,9 @@
 const express = require('express');
-const request = require('request');
 const socketIO = require('socket.io');
 const http = require('http');
+const path = require('path');
 const Emitter = require('events');
 const can = new Emitter();
-const uuidv1 = require('uuid/v1');
 
 
 const config = require('../../config');
@@ -15,8 +14,12 @@ const port = config.port || 3000;
 const app = express();
 const server = http.createServer(app);
 
+
+const imagesDirPath = path.join(__dirname, '..', '..', 'images');
 app.use(express.static('dist'));
-app.use(express.static('public'));
+app.use('/images', express.static(imagesDirPath));
+app.use('/public', express.static(path.join(__dirname, '..', '..', 'public')));
+
 
 server.listen(port, () => {
   console.log(`Server is ran on : http://localhost:${port}`);
@@ -83,4 +86,18 @@ can.on('person:unselect', (socket) => {
 
 can.on('shake', (data) => {
   console.log('shake');
+  console.log(data);
 });
+
+
+/*
+socket.emit('persons:sync', [
+  { id: 'spoons', userId: 'userXId' },
+  { id: 'balalaika' },
+  { id: 'ratchet', userId: 'userYId'  },
+  { id: 'accordion' },
+  { id: 'tambourine' },
+]);
+
+socket.emit('shake', { id: 'spoons', acceleration: {x, y, z}});
+*/
