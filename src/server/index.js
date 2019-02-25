@@ -17,7 +17,10 @@ const server = http.createServer(app);
 
 app.use(express.static('dist'));
 app.use('/public', express.static(path.join(__dirname, '..', '..', 'public')));
-// app.use('*/', path.join(__dirname, '..', '..'));
+app.get('/*', function(req, res, next) {
+  // res.sendFile(express.static(path.join(__dirname, '..', '..', 'dist', 'index.html')));
+  res.sendFile(path.join(__dirname + '/../../dist/index.html'));
+});
 
 
 server.listen(port, () => {
