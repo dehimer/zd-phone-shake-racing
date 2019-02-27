@@ -142,12 +142,10 @@ can.on('shake', (data, socket) => {
     clearTimeout(shakeTimeouts[socket.id]);
   }
 
-  // семь раз отмерь
   shakeTimeouts[socket.id] = setTimeout(() => {
-    // один раз отрежь
     delete shakeTimeouts[socket.id];
     can.emit('person:unselect', socket);
-  }, 700);
+  }, 15000);
 
 
   if (socketPersonMap[socket.id]) {

@@ -8,7 +8,7 @@ import {connect} from "react-redux";
 class Shaker extends Component {
   state = {
     acceleration: { x: 0, y: 0, z: 0 },
-    currentAcceleration: 0,
+    currentAccelerations: [],
     maxAcceleration: 10,
     err: null
   };
@@ -16,7 +16,7 @@ class Shaker extends Component {
   constructor(props) {
     super(props);
 
-    this.handleAcceleration = _.throttle(this.handleAcceleration, 100);
+    // this.handleAcceleration = _.throttle(this.handleAcceleration, 70);
   }
 
   handleAcceleration = (e) => {
@@ -36,20 +36,38 @@ class Shaker extends Component {
           maxAcceleration = currentAcceleration;
         }
 
-        this.setState({
-          maxAcceleration,
-          currentAcceleration,
-          acceleration
+        this.setState((prevState) => {
+          const currentAccelerations = prevState.currentAccelerations;
+
+          currentAccelerations.push(currentAcceleration);
+          if (currentAccelerations.length > 3) {
+            currentAccelerations.shift();
+          }
+
+          const nAcceleration = currentAcceleration/maxAcceleration;
+
+          if (
+            currentAccelerations.length === 3
+            && currentAccelerations[1] > currentAccelerations[0]
+            && currentAccelerations[1] > currentAccelerations[2]
+            && nAcceleration > 0.1
+          ) {
+            shake({ id: person.id, a: nAcceleration });
+          }
+
+          return {
+            maxAcceleration,
+            currentAccelerations,
+            acceleration
+          }
         });
 
-        shake({ id: person.id, acceleration: currentAcceleration/maxAcceleration });
     }
   };
 
   componentDidMount() {
-    /*
     // emulate events
-    setInterval(() => {
+    /*setInterval(() => {
       this.handleAcceleration({
         acceleration: {
           x: Math.random(),
@@ -57,8 +75,7 @@ class Shaker extends Component {
           z: Math.random()
         }
       })
-    }, 100);
-    */
+    }, 100);*/
     window.addEventListener('devicemotion', this.handleAcceleration, false);
   }
 
