@@ -2,12 +2,12 @@ import React from 'react';
 
 import styles from './index.css';
 
-import ScreenName from '../ScreenName';
+// import ScreenName from '../ScreenName';
 
 export default function SelectPerson({ persons, select }) {
   return (
     <div className={styles.selectPerson}>
-      <ScreenName name={<>Выберите<br/>инструмент</>}/>
+      <div className={styles.title}>ВЫБЕРИТЕ ИНСТРУМЕНТ</div>
       <div className={styles.personsWrapper}>
         <div className={styles.persons}>
           {

@@ -8,6 +8,12 @@
     height: 100%;
 }
 
+.title {
+    color: #469083;
+    font-family: OpenSansSemiBold, sans-serif;
+    letter-spacing: 2px;
+}
+
 .personsWrapper {
     overflow-y: scroll;
     flex: 0 0 77vh;

@@ -1,3 +1,18 @@
+@font-face {
+    font-family: OpenSansRegular;
+    src: url("/public/theme/Fonts/OpenSans/OpenSans-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: OpenSansBold;
+    src: url("/public/theme/Fonts/OpenSans/OpenSans-Bold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: OpenSansSemiBold;
+    src: url("/public/theme/Fonts/OpenSans/OpenSans-SemiBold.ttf") format("truetype");
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -9,5 +24,5 @@ body {
 }
 
 html {
-    font-family: 'Roboto', sans-serif;
+    font-family: OpenSansRegular, sans-serif;
 }
