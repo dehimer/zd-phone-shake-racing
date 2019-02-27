@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import _ from 'underscore';
 
-import ScreenName from "../ScreenName";
+import Title from '../Title';
+// import ScreenName from "../ScreenName";
 import styles from './index.css'
 import {connect} from "react-redux";
 
@@ -54,23 +55,13 @@ class Shaker extends Component {
     window.removeEventListener('devicemotion', this.handleAcceleration, false);
   }
 
-  /*
-  shouldComponentUpdate(nextProps, nextState) {
-    if (nextState.currentAcceleration !== this.state.currentAcceleration) return true;
-    if (nextProps.persons !== this.props.persons) return true;
-    if (nextProps.person !== this.props.person) return true;
-
-    return false;
-  }
-  */
-
   render() {
-    const { person } = this.props;
+    const { person, unselectPerson } = this.props;
     const { acceleration: { x, y, z } } = this.state;
 
     return (
       <div className={styles.shaker}>
-        <ScreenName name={<>Тряси<br/>и играй</>}/>
+        <Title back={() => unselectPerson(person.id)} color={'green'} />
         <div className={styles.content}>
           <img
             style={{
@@ -98,6 +89,13 @@ const mapDispatchToProps = dispatch => (
         data
       });
     },
+
+    unselectPerson: (id) => {
+      dispatch({
+        type: 'server/unselectperson',
+        data: id
+      });
+    }
   }
 );
 

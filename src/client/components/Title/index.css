@@ -1,0 +1,71 @@
+.title {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 11vh;
+    width: 100%;
+}
+
+.title .top {
+    flex: 0 0 10vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.title .top .center {
+    flex: 0 0 70%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.title .top .center img {
+    height: 60%;
+}
+
+.title .top .left {
+    height: 100%;
+    flex: 0 0 15%;
+    overflow: hidden;
+    display: flex;
+}
+
+.title .top .left img {
+    height: 100%;
+}
+
+.title .top .arrow {
+    height: 100%;
+    flex: 0 0 15%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title .top .arrow img {
+    height: 50%;
+}
+
+.title .top .right {
+    height: 100%;
+    flex: 0 0 15%;
+    overflow: hidden;
+    display: flex;
+}
+
+.title .top .right img {
+    height: 100%;
+}
+
+.title .bottom {
+    text-align: center;
+    margin-top: -10px;
+}
+
+.title .bottom img {
+    height: 4vh;
+}

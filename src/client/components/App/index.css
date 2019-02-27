@@ -5,43 +5,6 @@
   width: 100vw;
 }
 
-.title {
-  display: flex;
-  flex-direction: column;
-  flex: 0 0 11vh;
-}
-
-.title .top {
-  flex: 0 0 10vh;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  height: 5vh;
-}
-
-.title .top svg {
-  height: 90%;
-  width: 100%;
-}
-
-.title .top .left {
-  height: 10vh;
-}
-
-.title .top .right {
-  height: 10vh;
-}
-
-.title .bottom {
-  text-align: center;
-  margin-top: -10px;
-}
-
-.title .bottom img {
-  height: 4vh;
-}
-
 .content {
   flex: 1;
 }

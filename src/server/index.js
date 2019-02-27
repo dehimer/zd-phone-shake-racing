@@ -73,6 +73,9 @@ webmobileIO.on('connection', (socket) => {
       case 'server/selectperson':
         can.emit('person:select', socket, data);
         break;
+      case 'server/unselectperson':
+        can.emit('person:unselect', socket, data);
+        break;
       case 'server/shake':
         can.emit('shake', data, socket);
         break;

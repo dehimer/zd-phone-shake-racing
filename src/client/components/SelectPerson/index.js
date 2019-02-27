@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import styles from './index.css';
+import Title from "../Title";
 
 export default class SelectPerson extends Component {
   state = {
@@ -27,6 +28,7 @@ export default class SelectPerson extends Component {
 
     return (
       <div className={styles.selectPerson}>
+        <Title />
         <div className={styles.title}>Выберите инструмент</div>
         <div className={styles.persons}>
           {

@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import ReactSVG from 'react-svg'
-// import zmSvg from '/public/theme/ZM_1.svg';
-import SVG from 'react-inlinesvg';
-
 
 import SelectPerson from '../SelectPerson';
 import Shaker from '../Shaker';
@@ -65,17 +61,6 @@ class App extends Component {
 
     return (
       <div className={styles.app}>
-        <div className={styles.title}>
-          <div className={styles.top}>
-            <img className={styles.left} src={`/public/theme/decoration/F-6.png`} />
-            <SVG src='/public/theme/title.svg'/>
-            <img className={styles.right} src={`/public/theme/decoration/F-2.png`} />
-          </div>
-          <div className={styles.bottom}>
-            <img className={styles.bottom} src={`/public/theme/decoration/F-3.png`} />
-          </div>
-        </div>
-
         <div className={styles.content}>
           { contentEl }
         </div>
