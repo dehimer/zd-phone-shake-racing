@@ -1,5 +1,4 @@
 import React from 'react';
-import SVG from 'react-inlinesvg';
 
 import styles from "./index.css";
 

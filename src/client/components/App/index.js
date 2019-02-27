@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 
 import SelectPerson from '../SelectPerson';
 import Shaker from '../Shaker';
-import NoFreePersons from '../NoFreePersons';
 import Error from '../Error';
 
 import styles from './index.css'
@@ -33,7 +32,7 @@ class App extends Component {
   };
 
   componentDidMount() {
-    // this.checkAcceleration();
+    this.checkAcceleration();
   }
 
   render() {

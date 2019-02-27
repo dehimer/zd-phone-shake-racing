@@ -7,11 +7,112 @@
 }
 
 .message {
+    height: 40%;
     width: 100%;
-    padding: 10vh 10px;
-    background-color: #c95954;
-
+    color: #c53b36;
+    font-size: 4vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
     text-align: center;
-    font-size: 5vh;
-    font-family: HelveticaNeue-Light, Helvetica Neue Light, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;
+    font-family: OpenSansSemiBold, sans-serif;
+    letter-spacing: 1px;
+}
+
+.control {
+    height: 60%;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.control .top {
+    height: 7vh;
+    text-align: center;
+}
+
+.control .top img {
+    height: 100%;
+}
+
+.control .button {
+    color: #418b7e;
+    font-size: 2.5vh;
+    font-family: OpenSansBold, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+    width: 90vw;
+    height: 13vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.control .button img {
+   object-fit: contain;
+   position: absolute;
+}
+
+.control .buttonWhite {
+    color: white;
+
+    font-size: 2.5vh;
+    font-family: OpenSansBold, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+    width: 90vw;
+    height: 13vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.control .buttonWhite img {
+    object-fit: contain;
+    position: absolute;
+    z-index: 0;
+}
+
+.control .buttonWhite .name {
+    z-index: 1;
+}
+
+.control .bottom {
+    height: 25vh;
+    width: 70vw;
+    display: flex;
+}
+
+.control .bottom .left {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    padding-left: 15%;
+}
+
+.control .bottom .right {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 2vh;
+    padding-right: 12%;
+}
+
+.control .bottom img {
+    height: 100%;
+}
+
+.control .bottom .left img {
+    transform: rotate(-70deg);
+}
+
+.control .bottom .right img {
+    transform: rotate(90deg);
 }

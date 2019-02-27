@@ -13,6 +13,11 @@
     src: url("/public/theme/Fonts/OpenSans/OpenSans-SemiBold.ttf") format("truetype");
 }
 
+@font-face {
+    font-family: OpenSansExtraBold;
+    src: url("/public/theme/Fonts/OpenSans/OpenSans-ExtraBold.ttf") format("truetype");
+}
+
 body {
     margin: 0;
     padding: 0;
