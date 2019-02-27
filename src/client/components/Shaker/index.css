@@ -17,7 +17,7 @@
 
 .instrument img {
     width: 100%;
-    transition: transform 1s, scale 1ms;
+    transition: transform 0.1s, scale 0.1s;
 }
 
 
@@ -43,6 +43,7 @@
     color: #418b7e;
     font-size: 3.5vh;
     font-family: OpenSansRegular, sans-serif;
+    text-align: center;
 }
 
 .message .bottom {

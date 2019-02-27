@@ -29,19 +29,33 @@ export default class SelectPerson extends Component {
     return (
       <div className={styles.selectPerson}>
         <Title />
-        <div className={styles.title}>Выберите инструмент</div>
+        {
+          persons.every(person => person.userId)
+            ? <div className={styles.titleError}>Все инструменты заняты</div>
+            : <div className={styles.title}>Выберите инструмент</div>
+        }
+
         <div className={styles.persons}>
           {
-            persons && persons.map(({ id, avatar, name }) => (
-              <div
-                key={id}
-                className={selectedId === id ? styles.personSelected : styles.person}
-                onClick={() => this.preSelectPerson(id)}
-              >
-                <img src={`/public/theme/avatars/${avatar}`} />
-                <div className={styles.name}>{name}</div>
-              </div>
-            ))
+            persons && persons.map(({ id, avatar, name, userId }) => {
+              let usedStyle = styles.person;
+              if (userId) {
+                usedStyle = styles.personDisabled
+              } else if (selectedId === id) {
+                usedStyle = styles.personSelected;
+              }
+
+              return (
+                <div
+                  key={id}
+                  className={usedStyle}
+                  onClick={() => !userId && this.preSelectPerson(id)}
+                >
+                  <img alt={id} src={`/public/theme/avatars/${avatar}`} />
+                  <div className={styles.name}>{name}</div>
+                </div>
+              )
+            })
           }
         </div>
         <div className={styles.bottom}>

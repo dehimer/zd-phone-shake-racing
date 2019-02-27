@@ -15,6 +15,11 @@
     text-transform: uppercase;
 }
 
+.titleError {
+    composes: title;
+    color: #c53b36;
+}
+
 .persons {
     flex: 1;
     display: flex;
@@ -36,6 +41,11 @@
     box-sizing: border-box;
     cursor: pointer;
     z-index: 1;
+}
+
+.personDisabled {
+    composes: person;
+    opacity: 0.5;
 }
 
 .personSelected {

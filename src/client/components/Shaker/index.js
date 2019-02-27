@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import _ from 'underscore';
 
 import Title from '../Title';
-// import ScreenName from "../ScreenName";
 import styles from './index.css'
 import {connect} from "react-redux";
 
@@ -48,6 +47,18 @@ class Shaker extends Component {
   };
 
   componentDidMount() {
+    /*
+    // emulate events
+    setInterval(() => {
+      this.handleAcceleration({
+        acceleration: {
+          x: Math.random(),
+          y: Math.random(),
+          z: Math.random()
+        }
+      })
+    }, 100);
+    */
     window.addEventListener('devicemotion', this.handleAcceleration, false);
   }
 

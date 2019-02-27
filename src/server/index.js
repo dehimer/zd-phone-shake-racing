@@ -85,7 +85,7 @@ webmobileIO.on('connection', (socket) => {
 
 can.on('persons:sync', (socket=io) => {
   socket.emit('action', {
-    type: 'server/persons', data: persons.filter(person => !person.userId)
+    type: 'server/persons', data: persons
   });
 });
 

@@ -49,13 +49,7 @@ class App extends Component {
     } else if (person) {
       contentEl = <Shaker person={person} />;
     } else if (persons) {
-      const allPersonsInUse = persons && persons.length === 0;
-
-      if (allPersonsInUse) {
-        contentEl = <NoFreePersons />;
-      } else {
-        contentEl = <SelectPerson persons={persons} select={(id) => selectPerson(id)} />;
-      }
+      contentEl = <SelectPerson persons={persons} select={(id) => selectPerson(id)} />;
     }
 
 
