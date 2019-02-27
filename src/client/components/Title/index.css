@@ -44,6 +44,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 .title .top .arrow img {
@@ -55,6 +56,7 @@
     flex: 0 0 15%;
     overflow: hidden;
     display: flex;
+    justify-content: center;
 }
 
 .title .top .right img {

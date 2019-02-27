@@ -62,13 +62,31 @@ class Shaker extends Component {
     return (
       <div className={styles.shaker}>
         <Title back={() => unselectPerson(person.id)} color={'green'} />
-        <div className={styles.content}>
+        <div className={styles.instrument}>
           <img
             style={{
               transform: `translate(${x}%, ${y}%) scale(${1+z/50})`
             }}
             src={`/public/theme/avatars/${person.avatar}`}
           />
+        </div>
+        <div className={styles.message} >
+          <div className={styles.top}>
+            <img src={'/public/theme/decoration/F-4.png'} />
+          </div>
+
+          <div className={styles.text}>
+            Потрясите телефоном,<br/>управляйтие мелодией
+          </div>
+
+          <div className={styles.bottom}>
+            <div className={styles.left}>
+              <img src={'/public/theme/decoration/F-5.png'} />
+            </div>
+            <div className={styles.right}>
+              <img src={'/public/theme/decoration/F-1.png'} />
+            </div>
+          </div>
         </div>
       </div>
     )
