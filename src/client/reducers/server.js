@@ -8,6 +8,8 @@ export default function reducer(state = defaultState, action) {
   switch (type) {
     case 'server/selectedperson':
       return { ...state, person: data };
+    case 'server/unselectedperson':
+      return { ...state, person: null };
     case 'server/persons':
       return { ...state, persons: data };
     default:

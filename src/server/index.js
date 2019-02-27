@@ -45,12 +45,15 @@ unityIO.on('connection', (socket) => {
 });
 
 const addessSocketMap = {};
+const socketPersonMap = {};
 
 webmobileIO.on('connection', (socket) => {
   const { address } = socket.handshake;
+  console.log(`Connection from ${address}`);
+  can.emit('person:unselected', socket);
 
   if (addessSocketMap[address]) {
-    console.log(`Client ${address} is aleady connected. Disconnect oldest.`);
+    console.log(`Client ${address} is already connected. Disconnect oldest.`);
     addessSocketMap[address].emit('stop');
   }
 
@@ -71,7 +74,7 @@ webmobileIO.on('connection', (socket) => {
         can.emit('person:select', socket, data);
         break;
       case 'server/shake':
-        can.emit('shake', data);
+        can.emit('shake', data, socket);
         break;
     }
   });
@@ -87,8 +90,15 @@ can.on('person:selected', (socket) => {
   socket.emit('action', { type: 'server/selectedperson', data: persons.find(person => socket.id === person.userId) });
 });
 
+can.on('person:unselected', (socket) => {
+  socket.emit('action', { type: 'server/unselectedperson' });
+});
+
 can.on('person:select', (socket, personId) => {
   console.log('person:select');
+
+  socketPersonMap[socket.id] = personId;
+
   persons = persons.map((person) => {
     if (person.id === personId) {
       console.log(person);
@@ -105,6 +115,9 @@ can.on('person:select', (socket, personId) => {
 
 can.on('person:unselect', (socket) => {
   console.log('person:unselect');
+
+  delete socketPersonMap[socket.id];
+
   persons = persons.map((person) => {
     if (person.userId === socket.id) {
       console.log(person);
@@ -116,16 +129,31 @@ can.on('person:unselect', (socket) => {
   can.emit('persons:sync', webmobileIO);
   can.emit('persons', unityIO);
   can.emit('persons', emulatorIO);
-  can.emit('person:selected', socket)
+  can.emit('person:unselected', socket)
 });
 
+const shakeTimeouts = {};
 
-can.on('shake', (data) => {
-  console.log('shake');
-  console.log(data);
-  unityIO.emit('shake', data);
-  emulatorIO.emit('shake', data);
+can.on('shake', (data, socket) => {
+  if (shakeTimeouts[socket.id]) {
+    clearTimeout(shakeTimeouts[socket.id]);
+  }
+
+  // семь раз отмерь
+  shakeTimeouts[socket.id] = setTimeout(() => {
+    // один раз отрежь
+    delete shakeTimeouts[socket.id];
+    can.emit('person:unselect', socket);
+  }, 700);
+
+
+  if (socketPersonMap[socket.id]) {
+    console.log(data);
+    unityIO.emit('shake', data);
+    emulatorIO.emit('shake', data);
+  }
 });
+
 
 can.on('persons', (socket) => {
   socket.emit('persons', persons);

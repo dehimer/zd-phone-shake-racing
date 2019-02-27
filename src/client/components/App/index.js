@@ -88,6 +88,12 @@ const mapDispatchToProps = dispatch => (
         data: id
       });
     },
+    unselectPerson: (id) => {
+      dispatch({
+        type: 'server/unselectperson',
+        data: id
+      });
+    },
   }
 );
 
