@@ -76,7 +76,7 @@ class Shaker extends Component {
             style={{
               transform: `translate(${x}%, ${y}%) scale(${1+z/50})`
             }}
-            src={`/public/avatars/${person.avatar}`}
+            src={`/public/theme/avatars/${person.avatar}`}
           />
         </div>
       </div>

@@ -34,7 +34,7 @@ class App extends Component {
   };
 
   componentDidMount() {
-    this.checkAcceleration();
+    // this.checkAcceleration();
   }
 
   render() {

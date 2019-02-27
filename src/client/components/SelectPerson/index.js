@@ -5,9 +5,6 @@ import styles from './index.css';
 import ScreenName from '../ScreenName';
 
 export default function SelectPerson({ persons, select }) {
-  // console.log('SelectPerson');
-  // console.log(persons);
-
   return (
     <div className={styles.selectPerson}>
       <ScreenName name={<>Выберите<br/>инструмент</>}/>
@@ -20,7 +17,7 @@ export default function SelectPerson({ persons, select }) {
                 className={styles.person}
                 onClick={() => select(id)}
               >
-                <img src={`/public/avatars/${avatar}`}/>
+                <img src={`/public/theme/avatars/${avatar}`}/>
               </div>
             ))
           }
