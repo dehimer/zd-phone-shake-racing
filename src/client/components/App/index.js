@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import WifiNeeded from '../WifiNeeded';
 import SelectPerson from '../SelectPerson';
 import Shaker from '../Shaker';
 import Error from '../Error';
@@ -42,7 +43,9 @@ class App extends Component {
     const error = disconnected || reconnect || window.DeviceMotionEvent === undefined || noAcceleration;
 
     let contentEl = null;
-    if (error) {
+    if (location.hostname !== 'localhost' && !location.hostname.includes('192.168.')) {
+      contentEl = <WifiNeeded />
+    } else if (error) {
       const kind = (disconnected || reconnect) ? 'connection' : 'acceleration';
       contentEl = <Error kind={kind} />;
     } else if (person) {

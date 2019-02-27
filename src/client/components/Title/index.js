@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from "./index.css";
 
-export default ({ back, color }) => (
+export default ({ back, color, red }) => (
   <div className={styles.title}>
     <div className={styles.top}>
       <div className={back ? styles.arrow : styles.left} onClick={back ? back : ()=>{}}>
@@ -13,14 +13,20 @@ export default ({ back, color }) => (
         }
       </div>
       <div className={styles.center}>
-        <img src={'/public/theme/title.svg'} />
+        <img src={`/public/theme/title${red ? '_red' : ''}.svg`} />
       </div>
       <div className={styles.right}>
         <img src={'/public/theme/decoration/F-2.png'} />
       </div>
     </div>
     <div className={styles.bottom}>
-      <img className={styles.bottom} src={'/public/theme/decoration/F-3.png'} />
+
+      {
+        !red
+          ? <img className={styles.bottom} src={'/public/theme/decoration/F-3.png'} />
+          : null
+      }
+
     </div>
   </div>
 )
