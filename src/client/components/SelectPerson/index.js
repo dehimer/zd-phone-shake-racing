@@ -44,12 +44,12 @@ export default class SelectPerson extends Component {
         </div>
         <div className={styles.bottom}>
           <div className={styles.first}>
-            <img className={styles.left} src={`/public/theme/F-5.png`} />
-            <img className={styles.right} src={`/public/theme/F-1.png`} />
+            <img className={styles.left} src={`/public/theme/decoration/F-5.png`} />
+            <img className={styles.right} src={`/public/theme/decoration/F-1.png`} />
           </div>
           <div className={styles.second}>
-            <img className={styles.left} src={`/public/theme/F-4.png`} />
-            <img className={styles.right} src={`/public/theme/F-4.png`} />
+            <img className={styles.left} src={`/public/theme/decoration/F-4.png`} />
+            <img className={styles.right} src={`/public/theme/decoration/F-7.png`} />
           </div>
         </div>
       </div>
