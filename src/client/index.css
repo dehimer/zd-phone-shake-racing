@@ -2,7 +2,8 @@ body {
     margin: 0;
     padding: 0;
 
-    background-color: white;
+    background-color: #ebe4db;
+    background-image: url("/public/theme/backgrond.png");
 
     overflow: hidden;
 }
