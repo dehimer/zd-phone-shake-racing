@@ -6,11 +6,11 @@ const config = {
     avatar: true
   },
   persons: [
+    { id: 'accordion', name: 'Гармошка', avatar: 'garmoshka.png' },
+    { id: 'ratchet', name: 'Трещотки', avatar: 'treshetki.png' },
     { id: 'spoons', name: 'Ложки', avatar: 'loshki.png' },
-    { id: 'balalaika', name: 'Балалайка', avatar: 'balalaika.png' },
-    { id: 'ratchet', name: 'Трещотка', avatar: 'treshetki.png' },
-    { id: 'accordion', name: 'Аккордеон', avatar: 'garmoshka.png' },
     { id: 'tambourine', name: 'Бубен', avatar: 'buben.png' },
+    { id: 'balalaika', name: 'Балалайка', avatar: 'balalaika.png' },
   ]
 };
 
