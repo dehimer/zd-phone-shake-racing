@@ -7,12 +7,35 @@
 
 .title {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 0 0 5vh;
+  flex-direction: column;
+  flex: 0 0 14vh;
+}
 
-  font-size: 3.5vh;
-  font-family: HelveticaNeue-Light, Helvetica Neue Light, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;
+.title .top {
+  flex: 0 0 10vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 5vh;
+}
+
+.title .top svg {
+  height: 90%;
+  width: 100%;
+}
+
+.title .top .left {
+  height: 10vh;
+}
+
+.title .top .right {
+  height: 10vh;
+}
+
+.title .bottom {
+  text-align: center;
+  height: 4vh;
 }
 
 .content {
