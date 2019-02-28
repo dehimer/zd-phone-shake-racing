@@ -24,6 +24,7 @@ body {
 
     background-color: #ebe4db;
     background-image: url("/public/theme/backgrond.png");
+    background-size: cover;
 
     overflow: hidden;
 }
