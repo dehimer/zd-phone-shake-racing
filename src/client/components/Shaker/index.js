@@ -52,7 +52,7 @@ class Shaker extends Component {
             && currentAccelerations[1] > currentAccelerations[2]
             && nAcceleration > 0.1
           ) {
-            shake({ id: person.id, a: nAcceleration });
+            shake({ id: person.id, acceleration: nAcceleration });
           }
 
           return {
