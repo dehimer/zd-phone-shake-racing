@@ -31,10 +31,12 @@
     flex: 0 0 15%;
     overflow: hidden;
     display: flex;
+    justify-content: center;
 }
 
 .title .top .left img {
     height: 100%;
+    object-fit: scale-down;
 }
 
 .title .top .arrow {
@@ -49,6 +51,7 @@
 
 .title .top .arrow img {
     height: 40%;
+
 }
 
 .title .top .right {
@@ -61,6 +64,7 @@
 
 .title .top .right img {
     height: 100%;
+    object-fit: scale-down;
 }
 
 .title .bottom {
