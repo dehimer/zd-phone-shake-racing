@@ -45,12 +45,20 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
 }
 
 .title .top .arrow img {
     height: 40%;
+}
 
+.title .top .arrowArea {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 25%;
+    height: 15%;
+    cursor: pointer;
 }
 
 .title .top .right {

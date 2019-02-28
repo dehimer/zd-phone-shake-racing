@@ -5,10 +5,15 @@ import styles from "./index.css";
 export default ({ back, color, red }) => (
   <div className={styles.title}>
     <div className={styles.top}>
-      <div className={back ? styles.arrow : styles.left} onClick={back ? back : ()=>{}}>
+      <div className={back ? styles.arrow : styles.left}>
         {
           back
-            ? <img alt='back' src={`/public/theme/arrow_${color}.svg`} />
+            ? (
+              <>
+                <img alt='back' src={`/public/theme/arrow_${color}.svg`} />
+                <div className={styles.arrowArea} onClick={back ? back : ()=>{}}/>
+              </>
+            )
             : <img alt='f6' src={`/public/theme/decoration/F-6.png`} />
         }
       </div>
