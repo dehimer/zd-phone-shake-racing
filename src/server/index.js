@@ -47,6 +47,19 @@ unityIO.on('connection', (socket) => {
 const addessSocketMap = {};
 const socketPersonMap = {};
 
+const unselectTimeouts = {};
+const updateUnselectTimeouts = (socket) => {
+  if (unselectTimeouts[socket.id]) {
+    clearTimeout(unselectTimeouts[socket.id]);
+  }
+
+  unselectTimeouts[socket.id] = setTimeout(() => {
+    delete unselectTimeouts[socket.id];
+    can.emit('person:unselect', socket);
+  }, 5000);
+};
+
+
 webmobileIO.on('connection', (socket) => {
   const { address } = socket.handshake;
   console.log(`Connection from ${address}`);
@@ -100,6 +113,8 @@ can.on('person:unselected', (socket) => {
 can.on('person:select', (socket, personId) => {
   console.log('person:select');
 
+  updateUnselectTimeouts(socket);
+
   socketPersonMap[socket.id] = personId;
 
   persons = persons.map((person) => {
@@ -135,21 +150,12 @@ can.on('person:unselect', (socket) => {
   can.emit('person:unselected', socket)
 });
 
-const shakeTimeouts = {};
 
 can.on('shake', (data, socket) => {
-  if (shakeTimeouts[socket.id]) {
-    clearTimeout(shakeTimeouts[socket.id]);
-  }
-
-  shakeTimeouts[socket.id] = setTimeout(() => {
-    delete shakeTimeouts[socket.id];
-    can.emit('person:unselect', socket);
-  }, 15000);
-
+  updateUnselectTimeouts(socket);
 
   if (socketPersonMap[socket.id]) {
-    console.log(data);
+    // console.log(data);
     unityIO.emit('shake', data);
     emulatorIO.emit('shake', data);
   }
