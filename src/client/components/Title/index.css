@@ -31,7 +31,6 @@
     flex: 0 0 15%;
     overflow: hidden;
     display: flex;
-    justify-content: center;
 }
 
 .title .top .left img {
