@@ -67,5 +67,5 @@
     "webpack-cli": "^3.0.8",
     "webpack-dev-server": "^3.2.0"
   },
-  "heroku-postbuild": "webpack -p --config ./webpack.config.js --progress",
+  "heroku-postbuild": "webpack -p --config ./webpack.config.js --progress"
 }
