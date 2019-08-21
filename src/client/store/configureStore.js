@@ -6,7 +6,7 @@ import { rootReducer } from '../reducers/index';
 import { port } from '../../../config';
 
 // eslint-disable-next-line no-restricted-globals
-const socket = io(`http://${location.hostname}:${port}/webmobile`);
+const socket = io(`https://${location.hostname}:${port}/webmobile`);
 const socketIoMiddleware = createSocketIoMiddleware(socket, 'server/');
 
 export default function configureStore() {

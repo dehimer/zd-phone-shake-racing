@@ -1,9 +1,10 @@
 const express = require('express');
 const socketIO = require('socket.io');
-const http = require('http');
+const https = require('https');
 const path = require('path');
 const Emitter = require('events');
 const can = new Emitter();
+const fs = require('fs');
 
 
 const config = require('../../config');
@@ -12,19 +13,26 @@ let { persons } = config;
 // HTTP
 const port = config.port || 3000;
 const app = express();
-const server = http.createServer(app);
+const server = https.createServer({
+  key: fs.readFileSync(__dirname + '/../../key.pem'),
+  cert: fs.readFileSync(__dirname + '/../../cert.pem'),
+  passphrase: 'zd-cats'
+  // key: fs.readFileSync(__dirname + '/../../example.com+5-key.pem'),
+  // cert: fs.readFileSync(__dirname + '/../../example.com+5.pem'),
+  // requestCert: false,
+  // rejectUnauthorized: false
+}, app);
 
 
 app.use(express.static('dist'));
 app.use('/public', express.static(path.join(__dirname, '..', '..', 'public')));
-app.get('/*', function(req, res, next) {
-  // res.sendFile(express.static(path.join(__dirname, '..', '..', 'dist', 'index.html')));
+app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname + '/../../dist/index.html'));
 });
 
 
 server.listen(port, () => {
-  console.log(`Server is ran on : http://localhost:${port}`);
+  console.log(`Server is ran on : https://localhost:${port}`);
 });
 
 // SOCKETIO
